@@ -14,5 +14,8 @@ class Program
         list.Print();
 
         Console.WriteLine();
+
+        list.Reverse();
+        list.Print();
     }
 }

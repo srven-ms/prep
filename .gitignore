@@ -1,6 +1,9 @@
-/Prep/.vs/*
+/Prep/.vs/Prep/*
 /Prep/Prep/obj/*
 /Prep/Prep/obj/Debug/*
 /Prep/Prep/bin/*
 *.vsidx
 *.dll
+*.cache
+*.suo
+/Prep/Prep/obj/Debug/net8.0/Prep.AssemblyInfo.cs

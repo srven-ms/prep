@@ -50,6 +50,24 @@ public class List
         }
     }
 
+    // Method to reverse the linked list iteratively
+    public void Reverse()
+    {
+        ListNode prev = null;
+        ListNode current = head;
+        ListNode next = null;
+
+        while (current != null)
+        {
+            next = current.Next; // Store next node
+            current.Next = prev; // Reverse current node's pointer
+            prev = current; // Move pointers one position ahead
+            current = next;
+        }
+
+        head = prev;
+    }
+
     // Leet code #83. Remove Duplicates from Sorted List
     public ListNode DeleteDuplicates(ListNode head)
     {
@@ -60,24 +78,24 @@ public class List
         }
 
         ListNode curr = head;
-        ListNode temp = curr.next;
+        ListNode temp = curr.Next;
 
         while (temp != null)
         {
-            if (temp.val == curr.val)
+            if (temp.Value == curr.Value)
             {
-                temp = temp.next;
+                temp = temp.Next;
             }
             else
             {
-                curr.next = temp;
+                curr.Next = temp;
                 curr = temp;
 
-                temp = temp.next;
+                temp = temp.Next;
             }
         }
 
-        curr.next = temp;
+        curr.Next = temp;
 
         return head;
     }
