@@ -1,0 +1,6 @@
+/Prep/.vs/*
+/Prep/Prep/obj/*
+/Prep/Prep/obj/Debug/*
+/Prep/Prep/bin/*
+*.vsidx
+*.dll
