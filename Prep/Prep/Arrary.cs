@@ -6,6 +6,63 @@
         return FloodFillHelper(image, sr, sc, color, image[sr][sc]);
     }
 
+    public static int IslandPerimeter(int[][] grid)
+    {
+        int perimeter = 0;
+
+        for (int i = 0; i < grid.Length; i++)
+        {
+            for (int j = 0; j < grid[0].Length; j++)
+            {
+                if (grid[i][j] == 1)
+                {
+                    if (i - 1 < 0)
+                    {
+                        perimeter++;
+                    }
+                    
+                    if (i + 1 >= grid.Length)
+                    {
+                        perimeter++;
+                    }
+                    
+                    if (j - 1 < 0)
+                    {
+                        perimeter++;
+                    }
+
+                    if (j + 1 >= grid[0].Length)
+                    {
+                        perimeter++;
+                    }
+                    
+                    if (i-1 >=0 && grid[i - 1][j] == 0)
+                    {
+                        perimeter++;
+                    }
+                    
+                    if (i+1 < grid.Length && grid[i + 1][j] == 0)
+                    {
+                        perimeter++;
+                    }
+
+                    if (j-1 >= 0 && grid[i][j - 1] == 0)
+                    {
+                        perimeter++;
+                    }
+
+                    if (j+1 < grid[0].Length && grid[i][j+1] == 0)
+                    {
+                        perimeter++;
+                    }
+                    
+                }
+            }
+        }
+
+        return perimeter;
+    }
+
     private static int[][] FloodFillHelper(int[][] image, int sr, int sc, int newColor, int oldColor)
     {
         if (image[sr][sc] == newColor)

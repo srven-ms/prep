@@ -17,7 +17,7 @@ public class TreeNode
 
 public class Tree
 {
-    public TreeNode root { get; set; }
+    public TreeNode? root { get; set; }
 
     public Tree()
     {
@@ -34,6 +34,49 @@ public class Tree
         Inorder(node.left);
         Console.Write(node.val + "->");
         Inorder(node.right);
+    }
+
+    // 563: https://leetcode.com/problems/binary-tree-tilt/
+    public int FindTilt(TreeNode? root)
+    {
+        TreeNode node = ConvertTreeIntoTiltedTree(root);
+
+        return FindSum(node);
+    }
+
+    public TreeNode? ConvertTreeIntoTiltedTree(TreeNode? node)
+    {
+        if (node == null)
+        {
+            return null;
+        }
+
+        if (!this.IsLeafNode(node))
+        {
+            int l_sum = FindSum(node.left);
+            int r_sum = FindSum(node.right);
+
+            node.val = l_sum > r_sum ? (l_sum-r_sum) : (r_sum-l_sum);
+        }
+        else
+        {
+            node.val = 0;
+        }
+
+        ConvertTreeIntoTiltedTree(node.left);
+        ConvertTreeIntoTiltedTree(node.right);
+
+        return node;
+    }
+
+    public int FindSum(TreeNode node)
+    {
+        if (node == null)
+        {
+            return 0;
+        }
+
+        return node.val + FindSum(node.left) + FindSum(node.right);
     }
 
     public int SumOfLeftLeaves(TreeNode root)
@@ -98,5 +141,11 @@ public class Tree
         }
 
         return sum;
+    }
+
+    // Helper methods
+    private bool IsLeafNode(TreeNode node)
+    {
+        return node != null && node.left == null && node.right == null;
     }
 }
