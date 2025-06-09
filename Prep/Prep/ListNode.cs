@@ -99,4 +99,111 @@ public class List
 
         return head;
     }
+
+
+    // Leet code #141 https://leetcode.com/problems/linked-list-cycle/ 
+    public bool HasCycle(ListNode head)
+    {
+
+        if (head == null)
+        {
+            return false;
+        }
+
+        ListNode f = head;
+        ListNode s = head;
+
+        while (f != null && f.Next != null)
+        {
+
+            f = f.Next;
+
+            if (f != null)
+            {
+                f = f.Next;
+            }
+
+            s = s.Next;
+
+            if (s == f)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+
+    // Leet code #160 https://leetcode.com/problems/intersection-of-two-linked-lists/
+    public ListNode GetIntersectionNode(ListNode headA, ListNode headB)
+    {
+        int aListLength = 0;
+        int bListLength = 0;
+
+        ListNode tmp1 = headA;
+        ListNode tmp2 = headB;
+
+        // Find the length of both lists
+        while (tmp1 != null)
+        {
+            tmp1 = tmp1.Next;
+            aListLength++;
+        }
+
+        while (tmp2 != null)
+        {
+            tmp2 = tmp2.Next;
+            bListLength++;
+        }
+
+        // Find the lengthier list
+        bool moveA = false;
+        bool moveB = false;
+        int diff = 0;
+
+        if (aListLength > bListLength)
+        {
+            moveA = true;
+            diff = aListLength - bListLength;
+        }
+        else if (bListLength > aListLength)
+        {
+            moveB = true;
+            diff = bListLength - aListLength;
+        }
+
+        // Now, move the head of the longer list to match the difference
+        if (moveA)
+        {
+            while (diff > 0)
+            {
+                headA = headA.Next;
+                diff--;
+            }
+        }
+        else if (moveB)
+        {
+            while (diff > 0)
+            {
+                headB = headB.Next;
+                diff--;
+            }
+        }
+
+        // Move both list one node at a time.
+        // When they meet, it will be the intersection
+        while (headA != null && headB != null)
+        {
+            if (headA == headB)
+            {
+                return headA;
+            }
+
+            headA = headA.Next;
+            headB = headB.Next;
+        }
+
+        return null;
+    }
 }
